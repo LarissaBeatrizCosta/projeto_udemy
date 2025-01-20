@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "328673010778",
+    "project_id": "udemyapp-8be90",
+    "storage_bucket": "udemyapp-8be90.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328673010778:android:4ccb67d5a81e75b885e463",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAnAF8ZsBkotv84MPg46nolU8Sx6fcvGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328673010778:android:8b368ef998196c9385e463",
+        "android_client_info": {
+          "package_name": "udemy.curso.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAnAF8ZsBkotv84MPg46nolU8Sx6fcvGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
