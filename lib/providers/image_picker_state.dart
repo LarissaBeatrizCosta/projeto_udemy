@@ -37,7 +37,6 @@ class ImagePickerState extends ChangeNotifier {
 
     final path = imageSelected.path;
     final bytes = await File(path).readAsBytes();
-    print('bytes:' +bytes.toString());
     final directory = await getApplicationDocumentsDirectory();
 
     var rng = Random();
@@ -46,7 +45,6 @@ class ImagePickerState extends ChangeNotifier {
     final finalDirectory = File(
       pathProfileScreen,
     );
-    print('finalDirectory: ' + finalDirectory.toString());
     if (finalDirectory.existsSync()) {
 
       await finalDirectory.create(recursive: true);
