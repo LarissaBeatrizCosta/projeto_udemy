@@ -49,14 +49,16 @@ class _MyHomeViewState extends State<HomeView> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              child: CarouselHome(),
-            ),
-            ItemsHome(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 200,
+                child: CarouselHome(),
+              ),
+              ItemsHome(),
+            ],
+          ),
         ),
       ),
     );
