@@ -7,7 +7,7 @@ import 'package:udemy_curso_app/providers/image_picker_state.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
-//teste
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -64,16 +64,14 @@ class ProfileView extends StatelessWidget {
                   },
                   iconSize: 170,
                   color: Colors.black,
-                  icon: (state.profileImagePath != null
-                      ? CircleAvatar(
-                          radius: 80,
-                          backgroundImage: FileImage(
-                            File(state.profileImagePath!),
-                          ),
-                        )
-                      : Icon(
-                          Icons.account_circle,
-                        )),
+                  icon: Image.file(
+                    state.file ?? File(''),
+                    errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        Icons.account_circle,
+                      );
+                    },
+                  ),
                 ),
                 actions: [
                   SignedOutAction((context) async {
