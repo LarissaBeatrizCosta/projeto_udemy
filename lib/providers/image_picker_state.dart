@@ -12,15 +12,15 @@ class ImagePickerState extends ChangeNotifier {
   final _imagePicker = ImagePicker();
 
   String? profileImagePath;
+  var rng = Random();
   File? _file;
 
   File? get file => _file;
 
   Future<void> _init() async {
 
-    var rng = Random();
     final directory = await getApplicationSupportDirectory();
-    final filePath = '${directory.path}/${rng.nextInt(100)}/profileScreen.png';
+    final filePath = '${directory.path}/images/${rng.nextInt(100)}.png';
     _file = File(filePath);
 
     notifyListeners();
@@ -39,7 +39,6 @@ class ImagePickerState extends ChangeNotifier {
     final bytes = await File(path).readAsBytes();
     final directory = await getApplicationDocumentsDirectory();
 
-    var rng = Random();
     final pathProfileScreen = '${directory.path}/images/${rng.nextInt(100)}.png';
 
     final finalDirectory = File(

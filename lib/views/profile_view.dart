@@ -39,6 +39,7 @@ class ProfileView extends StatelessWidget {
                               title: Text("Câmera"),
                               onTap: () async {
                                 await state.getImageFromCamera();
+                                Navigator.pop(context);
                               },
                             ),
                             ListTile(
@@ -52,6 +53,8 @@ class ProfileView extends StatelessWidget {
                               title: Text("Galeria"),
                               onTap: () async {
                                 await state.getImageFromGallery();
+                                Navigator.pop(context);
+
                               },
                             ),
                           ],
