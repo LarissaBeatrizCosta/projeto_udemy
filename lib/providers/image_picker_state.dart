@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:math';
 
 class ImagePickerState extends ChangeNotifier {
   ImagePickerState() {
@@ -16,8 +17,10 @@ class ImagePickerState extends ChangeNotifier {
   File? get file => _file;
 
   Future<void> _init() async {
+
+    var rng = Random();
     final directory = await getApplicationSupportDirectory();
-    final filePath = '${directory.path}/images/image.png';
+    final filePath = '${directory.path}/${rng.nextInt(100)}/profileScreen.png';
     _file = File(filePath);
 
     notifyListeners();
@@ -34,16 +37,18 @@ class ImagePickerState extends ChangeNotifier {
 
     final path = imageSelected.path;
     final bytes = await File(path).readAsBytes();
-
+    print('bytes:' +bytes.toString());
     final directory = await getApplicationDocumentsDirectory();
 
-    final pathProfileScreen = '${directory.path}/images/image.png';
+    var rng = Random();
+    final pathProfileScreen = '${directory.path}/images/${rng.nextInt(100)}.png';
 
     final finalDirectory = File(
       pathProfileScreen,
     );
-
+    print('finalDirectory: ' + finalDirectory.toString());
     if (finalDirectory.existsSync()) {
+
       await finalDirectory.create(recursive: true);
     }
 
