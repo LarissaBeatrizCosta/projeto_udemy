@@ -13,6 +13,15 @@ class _MyHomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Center(
+          child: Text(
+            "PetShop Tulipa",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.orange,
+            ),
+          ),
+        ),
         leading: Container(
           margin: EdgeInsets.all(10),
           child: IconButton(
@@ -37,30 +46,26 @@ class _MyHomeViewState extends State<HomeView> {
           ),
         ],
       ),
-      body: Center(
-        child: GridView.count(
-          crossAxisCount: 3,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          children: [
-
-            Container(
-              color: Colors.pink,
-              width: 10,
-              height: 10,
-              child: Center(
-                child: Text(
-                  "Testando",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+      body: SafeArea(
+        child: SizedBox(
+          height: 200,
+          child: CarouselView(
+            itemExtent: MediaQuery.sizeOf(context).width - 32,
+            itemSnapping: true,
+            padding: EdgeInsets.all(4),
+            children: List.generate(
+              4,
+              (int index) {
+                return Container(
+                  color: Colors.amber,
+                  child: Image.asset(
+                    "assets/images/propaganda${index + 1}.png",
+                    fit: BoxFit.cover,
                   ),
-                ),
-              ),
+                );
+              },
             ),
-
-          ],
+          ),
         ),
       ),
     );
