@@ -1,4 +1,3 @@
-
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +53,6 @@ class ProfileView extends StatelessWidget {
                               onTap: () async {
                                 await state.getImageFromGallery();
                                 Navigator.pop(context);
-
                               },
                             ),
                           ],
@@ -67,7 +65,8 @@ class ProfileView extends StatelessWidget {
                   icon: state.file != null
                       ? CircleAvatar(
                           radius: 75,
-                          backgroundImage: FileImage(state.file!),
+                          backgroundImage:
+                              MemoryImage(state.file!.readAsBytesSync()),
                         )
                       : Icon(
                           Icons.account_circle,
@@ -76,6 +75,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 actions: [
                   SignedOutAction((context) async {
+
                     await Navigator.popAndPushNamed(context, '/login');
                   }),
                 ],
