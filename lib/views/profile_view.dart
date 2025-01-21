@@ -40,7 +40,6 @@ class ProfileView extends StatelessWidget {
                               title: Text("Câmera"),
                               onTap: () async {
                                 await state.getImageFromCamera();
-                                Navigator.pop(context);
                               },
                             ),
                             ListTile(
@@ -54,7 +53,6 @@ class ProfileView extends StatelessWidget {
                               title: Text("Galeria"),
                               onTap: () async {
                                 await state.getImageFromGallery();
-                                Navigator.pop(context);
                               },
                             ),
                           ],
@@ -64,14 +62,15 @@ class ProfileView extends StatelessWidget {
                   },
                   iconSize: 170,
                   color: Colors.black,
-                  icon: Image.file(
-                    state.file ?? File(''),
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        Icons.account_circle,
-                      );
-                    },
-                  ),
+                  icon: state.file != null
+                      ? CircleAvatar(
+                          radius: 75,
+                          backgroundImage: FileImage(state.file!),
+                        )
+                      : Icon(
+                          Icons.account_circle,
+                          size: 170,
+                        ),
                 ),
                 actions: [
                   SignedOutAction((context) async {
