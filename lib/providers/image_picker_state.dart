@@ -26,9 +26,15 @@ class ImagePickerState extends ChangeNotifier {
   Future<void> _init() async {
     final filePath = await _getProfileImagePath();
 
-    // Atualiza o valor da variável apenas se o arquivo existir
+    // Cria uma instância de File para o caminho
     final file = File(filePath);
-    _file = file;
+
+    // Verifica se o arquivo existe antes de atribuir
+    if (await file.exists()) {
+      _file = file;
+    } else {
+      _file = null; // Define como null caso o arquivo não exista
+    }
 
     notifyListeners();
   }
@@ -72,9 +78,6 @@ class ImagePickerState extends ChangeNotifier {
     await finalDirectory.writeAsBytes(bytes);
 
     _file = finalDirectory;
-
-    // Log para depuração
-    print("Imagem salva em: $_file");
 
     notifyListeners();
   }

@@ -75,7 +75,6 @@ class ProfileView extends StatelessWidget {
                 ),
                 actions: [
                   SignedOutAction((context) async {
-
                     await Navigator.popAndPushNamed(context, '/login');
                   }),
                 ],
