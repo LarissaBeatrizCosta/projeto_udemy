@@ -43,6 +43,7 @@ class _MyHomeViewState extends State<HomeView> {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           children: [
+
             Container(
               color: Colors.pink,
               width: 10,
@@ -58,36 +59,7 @@ class _MyHomeViewState extends State<HomeView> {
                 ),
               ),
             ),
-            Container(
-              color: Colors.pink,
-              width: 10,
-              height: 10,
-              child: Center(
-                child: Text(
-                  "Testando",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.pink,
-              width: 10,
-              height: 10,
-              child: Center(
-                child: Text(
-                  "Testando",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
+
           ],
         ),
       ),

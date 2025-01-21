@@ -17,7 +17,7 @@ class ImagePickerState extends ChangeNotifier {
 
   Future<void> _init() async {
     final directory = await getApplicationSupportDirectory();
-    final filePath = '${directory.path}/profileScreen.png';
+    final filePath = '${directory.path}/images/image.png';
     _file = File(filePath);
 
     notifyListeners();
@@ -25,7 +25,6 @@ class ImagePickerState extends ChangeNotifier {
 
 //Método para adicionar foto da galeria
   Future<void> getImageFromGallery() async {
-    File? profileImagePath;
     final imageSelected =
         await _imagePicker.pickImage(source: ImageSource.gallery);
 
@@ -37,18 +36,20 @@ class ImagePickerState extends ChangeNotifier {
     final bytes = await File(path).readAsBytes();
 
     final directory = await getApplicationDocumentsDirectory();
-    final pathProfileScreen = '${directory.path}/images/profileScreen.png';
+
+    final pathProfileScreen = '${directory.path}/images/image.png';
 
     final finalDirectory = File(
       pathProfileScreen,
     );
 
     if (finalDirectory.existsSync()) {
-      await finalDirectory.create();
+      await finalDirectory.create(recursive: true);
     }
 
-    profileImagePath = finalDirectory;
     await finalDirectory.writeAsBytes(bytes);
+
+    _file = finalDirectory;
     notifyListeners();
   }
 
