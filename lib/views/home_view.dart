@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:udemy_curso_app/utils/home/carousel_home.dart';
+import 'package:udemy_curso_app/utils/home/items_home.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -47,25 +49,14 @@ class _MyHomeViewState extends State<HomeView> {
         ],
       ),
       body: SafeArea(
-        child: SizedBox(
-          height: 200,
-          child: CarouselView(
-            itemExtent: MediaQuery.sizeOf(context).width - 32,
-            itemSnapping: true,
-            padding: EdgeInsets.all(4),
-            children: List.generate(
-              4,
-              (int index) {
-                return Container(
-                  color: Colors.amber,
-                  child: Image.asset(
-                    "assets/images/propaganda${index + 1}.png",
-                    fit: BoxFit.cover,
-                  ),
-                );
-              },
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              child: CarouselHome(),
             ),
-          ),
+            ItemsHome(),
+          ],
         ),
       ),
     );
