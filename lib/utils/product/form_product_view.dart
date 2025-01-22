@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
+import 'package:uuid/uuid.dart';
 
-final _formKey = GlobalKey<FormState>();
+final uuid = Uuid();
 final TextEditingController _nameController = TextEditingController();
 final TextEditingController _priceController = TextEditingController();
 
 class RegisterProductForm extends StatelessWidget {
-  const RegisterProductForm({super.key});
+  RegisterProductForm({super.key});
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class RegisterProductForm extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Form(
           key: _formKey,
-          child: TextFormStyle(),
+          child: TextFormStyle(formKey: _formKey),
         ),
       ),
     );
@@ -24,7 +27,9 @@ class RegisterProductForm extends StatelessWidget {
 }
 
 class TextFormStyle extends StatelessWidget {
-  const TextFormStyle({super.key});
+  final GlobalKey<FormState> formKey;
+
+  const TextFormStyle({super.key, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +91,13 @@ class TextFormStyle extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            if (_formKey.currentState!.validate()) {
+            if (formKey.currentState!.validate()) {
               ProductsModel newProduct = ProductsModel(
-                  id: 0,
+                  id: uuid.v4(),
                   name: _nameController.text,
                   price: double.tryParse(_priceController.text) ?? 0);
+              print(
+                  'FORMULARIO ${newProduct.id}- ${newProduct.name}- ${newProduct.price}');
             } else {
               Exception('Formulário preenchido incorretamente');
             }
