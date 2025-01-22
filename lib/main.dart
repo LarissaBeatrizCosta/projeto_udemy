@@ -11,6 +11,7 @@ import 'package:udemy_curso_app/views/login_view.dart';
 import 'package:udemy_curso_app/views/profile_view.dart';
 
 import 'package:intl/intl.dart';
+import 'package:udemy_curso_app/views/register_product_view.dart';
 import 'package:udemy_curso_app/views/splash_view.dart';
 
 import 'binds/user_binds.dart';
@@ -68,6 +69,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/splash',
           page: () => SplashView(),
+          binding: UserBind(),
+        ),
+        GetPage(
+          name: '/register_product',
+          page: () => RegisterProductView(),
           binding: UserBind(),
         )
       ],

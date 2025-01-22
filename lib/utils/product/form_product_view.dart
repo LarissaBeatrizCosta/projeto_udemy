@@ -7,6 +7,7 @@ class RegisterProductForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
+        padding: EdgeInsets.all(10),
         child: Form(
           child: TextFormField(),
         ),
