@@ -33,7 +33,23 @@ class RegisterProductView extends StatelessWidget {
         ],
       ),
       drawer: DrawerHome(),
-      body: RegisterProductForm(),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 10, top: 20),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Cadastre Novos Produtos',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          RegisterProductForm(),
+        ],
+      ),
     );
   }
 }
