@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:udemy_curso_app/controllers/firebase_options.dart';
 import 'package:udemy_curso_app/i10/auth.dart';
 import 'package:udemy_curso_app/views/home_view.dart';
@@ -29,6 +30,7 @@ Future<void> main() async {
   );
   auth = FirebaseAuth.instanceFor(app: app);
 
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -66,6 +68,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/splash',
           page: () => SplashView(),
+          binding: UserBind(),
         )
       ],
     );

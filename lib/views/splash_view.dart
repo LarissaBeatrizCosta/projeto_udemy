@@ -20,8 +20,8 @@ class SplashView extends StatelessWidget {
         height: 50,
         child: Image.asset("assets/images/dog.png"),
       ),
-      duration: const Duration(milliseconds: 2500),
-      animationDuration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 1500),
+      animationDuration: const Duration(milliseconds: 1000),
       onAnimationEnd: () => debugPrint("On Scale End"),
       nextScreen: const LoginView(),
     );
