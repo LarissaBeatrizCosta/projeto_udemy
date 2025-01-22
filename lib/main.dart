@@ -12,6 +12,8 @@ import 'package:udemy_curso_app/views/profile_view.dart';
 import 'package:intl/intl.dart';
 import 'package:udemy_curso_app/views/splash_view.dart';
 
+import 'binds/user_binds.dart';
+
 bool shouldUseFirebaseEmulator = false;
 
 late final FirebaseApp app;
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/login',
           page: () => LoginView(),
+          binding: UserBind(),
         ),
         GetPage(
           name: '/home',
