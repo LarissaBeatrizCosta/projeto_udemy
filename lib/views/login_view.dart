@@ -12,7 +12,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final Rx<bool>_isLoading = true.obs;
+  final Rx<bool> _isLoading = true.obs;
 
   @override
   void initState() {
@@ -33,16 +33,8 @@ class _LoginViewState extends State<LoginView> {
     if (_isLoading.value) {
       return Scaffold(
         body: Center(
-          child: SimpleCircularProgressBar(
-            animationDuration: 100,
-            maxValue: 100,
-            progressColors: const [
-              Colors.orange,
-              Colors.orangeAccent,
-              Colors.deepOrange,
-              Colors.deepOrangeAccent,
-            ],
-            backColor: Colors.black,
+          child: CircularProgressIndicator(
+            color: Colors.amber,
           ),
         ),
       );
