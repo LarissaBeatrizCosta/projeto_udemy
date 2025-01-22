@@ -37,7 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   get: ^4.6.6
-  flutter_launcher_icons: ^0.14.2
+  flutter_launcher_icons: ^0.14.3
   firebase_auth: ^5.4.0
   firebase_core: ^3.10.0
   firebase_ui_auth: ^1.16.1
@@ -49,7 +49,6 @@ dependencies:
   provider: ^6.1.2
   get_storage: ^2.1.1
   simple_circular_progress_bar: ^1.0.2
-  sidebarx: ^0.17.1
 
 dev_dependencies:
   flutter_test:
@@ -76,20 +75,19 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/images/dog.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "path/to/image.png"
-    background_color: "#hexcode"
-    theme_color: "#hexcode"
+    image_path: "assets/images/dog.png"
+
   windows:
     generate: true
-    image_path: "path/to/image.png"
+    image_path: "assets/images/dog.png"
     icon_size: 48 # min:48, max:256, default: 48
   macos:
     generate: true
-    image_path: "path/to/image.png"
+    image_path: "assets/images/dog.png"
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

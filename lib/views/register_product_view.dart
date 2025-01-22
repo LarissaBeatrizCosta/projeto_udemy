@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils/home/drawer_home.dart';
 import '../utils/product/form_product_view.dart';
 
 class RegisterProductView extends StatelessWidget {
@@ -19,18 +20,6 @@ class RegisterProductView extends StatelessWidget {
             ),
           ),
         ),
-        leading: Container(
-          margin: EdgeInsets.all(10),
-          child: IconButton(
-            onPressed: () {
-              //todo: opções de navegação
-            },
-            icon: Icon(
-              (Icons.menu_outlined),
-              color: Colors.amber,
-            ),
-          ),
-        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -43,6 +32,7 @@ class RegisterProductView extends StatelessWidget {
           ),
         ],
       ),
+      drawer: DrawerHome(),
       body: RegisterProductForm(),
     );
   }

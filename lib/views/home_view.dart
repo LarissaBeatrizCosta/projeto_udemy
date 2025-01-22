@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sidebarx/sidebarx.dart';
 import 'package:udemy_curso_app/utils/home/carousel_home.dart';
 import 'package:udemy_curso_app/utils/home/items_home.dart';
 
