@@ -1,5 +1,5 @@
 class ProductsModel {
-  final int id; //Verificar se pode ser null
+  final int id;
 
   final String name;
 
