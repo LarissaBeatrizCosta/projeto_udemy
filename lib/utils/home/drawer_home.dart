@@ -10,6 +10,7 @@ class DrawerHome extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
+            duration: Duration(milliseconds:1),
             decoration: BoxDecoration(
               color: Colors.orangeAccent,
             ),
@@ -19,18 +20,25 @@ class DrawerHome extends StatelessWidget {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.popAndPushNamed(context, '/home');
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.edit),
             title: const Text('Cadastrar Produtos'),
             onTap: () {
               Navigator.popAndPushNamed(context, '/register_product');
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Configurações'),
-            onTap: () {
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.settings),
+          //   title: const Text('Configurações'),
+          //   onTap: () {
+          //   },
+          // ),
         ],
       ),
     );
