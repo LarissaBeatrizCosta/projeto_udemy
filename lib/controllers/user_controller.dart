@@ -10,6 +10,16 @@ class UserController extends GetxController {
       saveLocalUser(value);
     }
   }
+
+  Future<String?> get getUser async {
+    if (userToken.value == '') {
+      String? token = await loadLocalUser();
+      if (token != null) {
+        userToken.value = token;
+      }
+    }
+    return userToken.value;
+  }
 }
 
 Future<void> saveLocalUser(String value) async {
@@ -18,7 +28,7 @@ Future<void> saveLocalUser(String value) async {
   await box.save();
 }
 
-Future<String?> loadLocalUse() async {
+Future<String?> loadLocalUser() async {
   GetStorage box = GetStorage();
   final String? value = box.read('userToken');
   if (value != null) {

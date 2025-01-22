@@ -1,6 +1,8 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:udemy_curso_app/controllers/user_controller.dart';
 import 'package:udemy_curso_app/providers/image_picker_state.dart';
 
 class ProfileView extends StatelessWidget {
@@ -74,9 +76,12 @@ class ProfileView extends StatelessWidget {
                         ),
                 ),
                 actions: [
-                  SignedOutAction((context) async {
-                    await Navigator.popAndPushNamed(context, '/login');
-                  }),
+                  SignedOutAction(
+                    (context) async {
+                      Get.find<UserController>().setUserToken = '';
+                      await Navigator.popAndPushNamed(context, '/login');
+                    },
+                  ),
                 ],
               ),
             );

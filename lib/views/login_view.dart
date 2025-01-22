@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:get/get.dart';
+import 'package:udemy_curso_app/controllers/user_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -10,6 +11,18 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() async {
+      final user = await Get.find<UserController>().getUser;
+      if (user != '') {
+        Get.offNamed('/home');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final providers = [EmailAuthProvider()];
@@ -65,7 +78,9 @@ class _LoginViewState extends State<LoginView> {
         AuthStateChangeAction<UserCreated>((context, state) {
           Get.offNamed('/home');
         }),
-        AuthStateChangeAction<SignedIn>((context, state) {
+        AuthStateChangeAction<SignedIn>((context, state) async {
+          Get.find<UserController>().setUserToken =
+              await state.user?.getIdToken();
           Get.offNamed('/home');
         }),
       ],

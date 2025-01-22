@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/profile',
           page: () => ProfileView(),
+          binding: UserBind(),
         ),
         GetPage(
           name: '/login',
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/home',
           page: () => HomeView(),
+          binding: UserBind(),
         ),
         GetPage(
           name: '/splash',
