@@ -50,6 +50,7 @@ dependencies:
   get_storage: ^2.1.1
   simple_circular_progress_bar: ^1.0.2
   uuid: ^4.5.1
+  cloud_firestore: ^5.6.2
 
 dev_dependencies:
   flutter_test:

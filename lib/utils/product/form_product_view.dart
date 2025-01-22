@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
@@ -90,14 +91,16 @@ class TextFormStyle extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
             if (formKey.currentState!.validate()) {
               ProductsModel newProduct = ProductsModel(
                   id: uuid.v4(),
                   name: _nameController.text,
                   price: double.tryParse(_priceController.text) ?? 0);
-              print(
-                  'FORMULARIO ${newProduct.id}- ${newProduct.name}- ${newProduct.price}');
+              await FirebaseFirestore.instance
+                  .collection('products')
+                  .doc(newProduct.id)
+                  .set(newProduct.toMapProducts());
             } else {
               Exception('Formulário preenchido incorretamente');
             }
