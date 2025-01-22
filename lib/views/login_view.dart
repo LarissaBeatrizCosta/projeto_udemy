@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:get/get.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:udemy_curso_app/controllers/user_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -11,6 +12,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final Rx<bool>_isLoading = true.obs;
+
   @override
   void initState() {
     super.initState();
@@ -19,12 +22,32 @@ class _LoginViewState extends State<LoginView> {
       final user = await Get.find<UserController>().getUser;
       if (user != '') {
         Get.offNamed('/home');
+      } else {
+        _isLoading.value = false;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading.value) {
+      return Scaffold(
+        body: Center(
+          child: SimpleCircularProgressBar(
+            animationDuration: 100,
+            maxValue: 100,
+            progressColors: const [
+              Colors.orange,
+              Colors.orangeAccent,
+              Colors.deepOrange,
+              Colors.deepOrangeAccent,
+            ],
+            backColor: Colors.black,
+          ),
+        ),
+      );
+    }
+
     final providers = [EmailAuthProvider()];
 
     return SignInScreen(
