@@ -49,6 +49,7 @@ dependencies:
   provider: ^6.1.2
   get_storage: ^2.1.1
   simple_circular_progress_bar: ^1.0.2
+  sidebarx: ^0.17.1
 
 dev_dependencies:
   flutter_test:

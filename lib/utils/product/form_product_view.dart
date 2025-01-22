@@ -9,9 +9,26 @@ class RegisterProductForm extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(10),
         child: Form(
-          child: TextFormField(),
+          child: TextFormStyle(),
         ),
       ),
     );
   }
 }
+
+
+class TextFormStyle extends StatelessWidget{
+  const TextFormStyle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(),
+        TextFormField(),
+      ],
+    );
+  }
+
+}
+

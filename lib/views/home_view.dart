@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sidebarx/sidebarx.dart';
 import 'package:udemy_curso_app/utils/home/carousel_home.dart';
 import 'package:udemy_curso_app/utils/home/items_home.dart';
+
+import '../utils/home/drawer_home.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -24,18 +27,6 @@ class _MyHomeViewState extends State<HomeView> {
             ),
           ),
         ),
-        leading: Container(
-          margin: EdgeInsets.all(10),
-          child: IconButton(
-            onPressed: () {
-              //todo: opções de navegação
-            },
-            icon: Icon(
-              (Icons.menu_outlined),
-              color: Colors.amber,
-            ),
-          ),
-        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -48,6 +39,7 @@ class _MyHomeViewState extends State<HomeView> {
           ),
         ],
       ),
+      drawer: DrawerHome(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
