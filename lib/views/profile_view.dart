@@ -40,7 +40,6 @@ class ProfileView extends StatelessWidget {
                               title: Text("Câmera"),
                               onTap: () async {
                                 await state.getImageFromCamera();
-                                Navigator.pop(context);
                               },
                             ),
                             ListTile(
@@ -54,7 +53,6 @@ class ProfileView extends StatelessWidget {
                               title: Text("Galeria"),
                               onTap: () async {
                                 await state.getImageFromGallery();
-                                Navigator.pop(context);
                               },
                             ),
                           ],
@@ -79,7 +77,8 @@ class ProfileView extends StatelessWidget {
                   SignedOutAction(
                     (context) async {
                       Get.find<UserState>().setUserToken = '';
-                      await Navigator.popAndPushNamed(context, '/login');
+                      await Navigator.pushReplacementNamed(
+                          context, '/login');
                     },
                   ),
                 ],
