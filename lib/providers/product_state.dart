@@ -5,7 +5,7 @@ class ProductState extends ChangeNotifier {
 
 
   //Método que add no banco de produtos
-  Future<void> insertProduct(String collection, String productId,
+  Future<void> insertProduct(String productId,
       Map<String, dynamic> mapProduct) async {
     FirebaseFirestore.instance
         .collection('products')

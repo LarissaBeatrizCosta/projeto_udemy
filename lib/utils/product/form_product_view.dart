@@ -1,7 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
+import 'package:udemy_curso_app/providers/product_state.dart';
 import 'package:uuid/uuid.dart';
 
 final uuid = Uuid();
@@ -15,12 +16,17 @@ class RegisterProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: _formKey,
-          child: TextFormStyle(formKey: _formKey),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductState()),
+      ],
+      child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: _formKey,
+            child: TextFormStyle(formKey: _formKey),
+          ),
         ),
       ),
     );
@@ -83,36 +89,40 @@ class TextFormStyle extends StatelessWidget {
           },
         ),
         const SizedBox(height: 30),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.orange,
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              ProductsModel newProduct = ProductsModel(
-                  id: uuid.v4(),
-                  name: _nameController.text,
-                  price: double.tryParse(_priceController.text) ?? 0);
-              await FirebaseFirestore.instance
-                  .collection('products')
-                  .doc(newProduct.id)
-                  .set(newProduct.toMapProducts());
-            } else {
-              Exception('Formulário preenchido incorretamente');
-            }
+        Consumer<ProductState>(
+          builder: (BuildContext context, _state, _) {
+            return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () async {
+                if (formKey.currentState!.validate()) {
+                  ProductsModel newProduct = ProductsModel(
+                      id: uuid.v4(),
+                      name: _nameController.text,
+                      price: double.tryParse(_priceController.text) ?? 0);
+                  await _state.insertProduct(
+                    newProduct.id,
+                    newProduct.toMapProducts(),
+                  );
+                } else {
+                  Exception('Formulário preenchido incorretamente');
+                }
+              },
+              child: const Text(
+                'Cadastrar Produto',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+            );
           },
-          child: const Text(
-            'Cadastrar Produto',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Colors.black,
-            ),
-          ),
         ),
       ],
     );
