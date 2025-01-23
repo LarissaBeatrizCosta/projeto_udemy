@@ -22,7 +22,6 @@ class ProductState extends ChangeNotifier {
   //Crregamento
   bool isLoading = false;
 
-
 //Método que recupera os produtos do firebase
   Future<void> getProducts() async {
     try {
@@ -44,7 +43,7 @@ class ProductState extends ChangeNotifier {
     } catch (e) {
       print("ERRO NO GET + $e");
       notifyListeners();
-    }finally {
+    } finally {
       isLoading = false;
     }
   }
@@ -56,6 +55,17 @@ class ProductState extends ChangeNotifier {
         .collection('products')
         .doc(productId)
         .set(mapProduct);
+    notifyListeners();
+  }
+
+  //Método que deleta do firestore
+  Future<void> deleteProduct(ProductsModel productId) async {
+    await FirebaseFirestore.instance
+        .collection('products')
+        .doc(productId.toString())
+        .delete();
+    productsList.remove(productId);
+
     notifyListeners();
   }
 }

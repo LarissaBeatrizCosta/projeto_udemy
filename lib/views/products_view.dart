@@ -85,7 +85,9 @@ class ProductsView extends StatelessWidget {
                         ),
                         IconButton(
                           icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: () {},
+                          onPressed: () {
+                            stateProduct.deleteProduct(product);
+                          },
                         ),
                       ],
                     ),
