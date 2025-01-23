@@ -51,12 +51,45 @@ class ProductsView extends StatelessWidget {
             }
 
             return ListView.builder(
+              shrinkWrap: true,
               itemCount: stateProduct.productsList.length,
               itemBuilder: (context, index) {
                 final product = stateProduct.productsList[index];
-                return ListTile(
-                  title: Text(product.name),
-                  subtitle: Text(product.price.toString()),
+                return Card(
+                  color: Colors.white,
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
+                  elevation: 4,
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(16.0),
+                    title: Text(
+                      product.name,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      'Preço: R\$ ${product.price.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit, color: Colors.blue),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../utils/home/drawer_home.dart';
-import '../utils/product/form_product_view.dart';
+import '../utils/product/form_register_product_view.dart';
 
 class RegisterProductView extends StatelessWidget {
   const RegisterProductView({super.key});

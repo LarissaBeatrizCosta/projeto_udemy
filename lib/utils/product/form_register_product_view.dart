@@ -116,14 +116,15 @@ class TextFormStyle extends StatelessWidget {
                     newProduct.toMapProducts(),
                   );
                   await stateSnack.sucess('Produto cadastrado.');
-                  Navigator.popAndPushNamed(context, '/home');
+                  _nameController.clear();
+                  _priceController.clear();
                 } else {
-                  await stateSnack.error('Formulário preenchido incorretamente');
-                 
+                  await stateSnack
+                      .error('Formulário preenchido incorretamente');
                 }
               },
               child: const Text(
-                'Cadastrar Produto',
+                'Cadastrar produto',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -132,6 +133,27 @@ class TextFormStyle extends StatelessWidget {
               ),
             );
           },
+        ),
+        SizedBox(height: 15),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.amber,
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/products');
+          },
+          child: const Text(
+            'Ver produtos',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
         ),
       ],
     );
