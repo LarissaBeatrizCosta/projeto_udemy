@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
 import 'package:udemy_curso_app/providers/product_state.dart';
@@ -119,7 +118,8 @@ class TextFormStyle extends StatelessWidget {
                   await stateSnack.sucess('Produto cadastrado.');
                   Navigator.popAndPushNamed(context, '/home');
                 } else {
-                  Exception('Formulário preenchido incorretamente');
+                  await stateSnack.error('Formulário preenchido incorretamente');
+                 
                 }
               },
               child: const Text(

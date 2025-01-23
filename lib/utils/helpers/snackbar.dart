@@ -6,16 +6,16 @@ class SnackBarHelp extends ChangeNotifier {
     Get.snackbar(
       'Sucesso',
       msg,
-      colorText: Colors.white,
-      backgroundColor: Colors.greenAccent.withValues(),
+      colorText: Colors.black,
+      backgroundColor: Colors.lightGreen.withValues(),
     );
   }
 
-  void error(String msg) {
+  Future<void> error(String msg) async {
     Get.snackbar(
       'Erro',
       msg,
-      colorText: Colors.white,
+      colorText: Colors.black,
       backgroundColor: Colors.redAccent.withValues(),
     );
   }
