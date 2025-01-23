@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:udemy_curso_app/providers/product_state.dart';
+import '../utils/helpers/circular_progress.dart';
 import '../utils/home/drawer_home.dart';
 
 class ProductsView extends StatelessWidget {
@@ -42,7 +43,7 @@ class ProductsView extends StatelessWidget {
         body: Consumer<ProductState>(
           builder: (BuildContext context, stateProduct, _) {
             if (stateProduct.isLoading) {
-              return Center(child: CircularProgressIndicator());
+              return CircularProgress();
             }
 
             if (stateProduct.productsList.isEmpty) {

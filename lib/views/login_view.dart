@@ -3,6 +3,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:get/get.dart';
 import 'package:udemy_curso_app/providers/user_state.dart';
 
+import '../utils/helpers/circular_progress.dart';
+
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
@@ -30,13 +32,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading.value) {
-      return Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(
-            color: Colors.amber,
-          ),
-        ),
-      );
+      return CircularProgress();
     }
 
     final providers = [EmailAuthProvider()];
@@ -93,8 +89,7 @@ class _LoginViewState extends State<LoginView> {
           Get.offNamed('/home');
         }),
         AuthStateChangeAction<SignedIn>((context, state) async {
-          Get.find<UserState>().setUserToken =
-              await state.user?.getIdToken();
+          Get.find<UserState>().setUserToken = await state.user?.getIdToken();
           Get.offNamed('/home');
         }),
       ],
