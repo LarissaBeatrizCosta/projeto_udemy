@@ -66,4 +66,17 @@ class ProductState extends ChangeNotifier {
     productsList.removeWhere((product) => product.id == productId);
     notifyListeners();
   }
+
+  //Método que atualiza
+  Future<void> updateProduct(
+      String name, double price, String productId) async {
+    await FirebaseFirestore.instance
+        .collection('products')
+        .doc(productId)
+        .update({
+      'name': name,
+      'price':price
+    });
+    notifyListeners();
+  }
 }

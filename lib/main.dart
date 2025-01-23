@@ -21,6 +21,7 @@ bool shouldUseFirebaseEmulator = false;
 
 late final FirebaseApp app;
 late final FirebaseAuth auth;
+
 Future<void> main() async {
   //Altera o idioma para português
   Intl.defaultLocale = 'pt_BR';
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
           name: '/products',
           page: () => ProductsView(),
           binding: UserBind(),
-        )
+        ),
       ],
     );
   }

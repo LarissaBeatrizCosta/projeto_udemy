@@ -81,7 +81,9 @@ class ProductsView extends StatelessWidget {
                       children: [
                         IconButton(
                           icon: Icon(Icons.edit, color: Colors.blue),
-                          onPressed: () {},
+                          onPressed: () async {
+
+                          },
                         ),
                         IconButton(
                           icon: Icon(Icons.delete, color: Colors.red),
@@ -101,3 +103,91 @@ class ProductsView extends StatelessWidget {
     );
   }
 }
+
+// void _showEditDialog(BuildContext context, ProductsModel product,
+//     ProductState stateProductModal) {
+//   final TextEditingController nameController = TextEditingController();
+//   final TextEditingController priceController = TextEditingController();
+//   final formKey = GlobalKey<FormState>();
+//
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         title: Text('Editar Produto'),
+//         content: SingleChildScrollView(
+//           child: Form(
+//             key: formKey,
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 TextFormField(
+//                   controller: nameController,
+//                   decoration: InputDecoration(
+//                     labelText: 'Nome do Produto',
+//                     labelStyle: const TextStyle(color: Colors.orange),
+//                     border: OutlineInputBorder(
+//                       borderRadius: BorderRadius.circular(10),
+//                     ),
+//                     focusedBorder: OutlineInputBorder(
+//                       borderSide:
+//                           const BorderSide(color: Colors.orange, width: 2),
+//                     ),
+//                   ),
+//                   validator: (value) {
+//                     if (value == null || value.isEmpty) {
+//                       return "Preencha o nome do produto";
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//                 SizedBox(height: 16), // Espaço entre os campos
+//                 TextFormField(
+//                   controller: priceController,
+//                   decoration: InputDecoration(
+//                     labelText: 'Preço do Produto',
+//                     labelStyle: const TextStyle(color: Colors.orange),
+//                     border: OutlineInputBorder(
+//                       borderRadius: BorderRadius.circular(10),
+//                     ),
+//                     focusedBorder: OutlineInputBorder(
+//                       borderSide:
+//                           const BorderSide(color: Colors.orange, width: 2),
+//                     ),
+//                   ),
+//                   keyboardType: TextInputType.number,
+//                   validator: (value) {
+//                     if (value == null || value.isEmpty) {
+//                       return "Preencha o preço do produto";
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//         actions: [
+//           TextButton(
+//             onPressed: () {
+//               if (formKey.currentState!.validate()) {
+//                 stateProductModal.updateProduct(
+//                     product.name, product.price, product.id);
+//                 print(
+//                     'MODAL AQUI ${product.name}-${product.price}-${product.id}');
+//                 Navigator.pushReplacementNamed(context, '/home');
+//               }
+//             },
+//             child: Text('Salvar'),
+//           ),
+//           TextButton(
+//             onPressed: () {
+//               Navigator.of(context).pop();
+//             },
+//             child: Text('Cancelar'),
+//           ),
+//         ],
+//       );
+//     },
+//   );
+// }
