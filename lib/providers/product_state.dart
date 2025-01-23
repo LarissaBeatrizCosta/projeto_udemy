@@ -59,13 +59,12 @@ class ProductState extends ChangeNotifier {
   }
 
   //Método que deleta do firestore
-  Future<void> deleteProduct(ProductsModel productId) async {
+  Future<void> deleteProduct(String productId) async {
     await FirebaseFirestore.instance
         .collection('products')
-        .doc(productId.toString())
+        .doc(productId)
         .delete();
-    productsList.remove(productId);
-
+    productsList.removeWhere((product) => product.id == productId);
     notifyListeners();
   }
 }
