@@ -8,6 +8,7 @@ import 'package:udemy_curso_app/controllers/firebase_options.dart';
 import 'package:udemy_curso_app/i10/auth.dart';
 import 'package:udemy_curso_app/views/home_view.dart';
 import 'package:udemy_curso_app/views/login_view.dart';
+import 'package:udemy_curso_app/views/products_view.dart';
 import 'package:udemy_curso_app/views/profile_view.dart';
 
 import 'package:intl/intl.dart';
@@ -74,6 +75,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/register_product',
           page: () => RegisterProductView(),
+          binding: UserBind(),
+        ),
+        GetPage(
+          name: '/products',
+          page: () => ProductsView(),
           binding: UserBind(),
         )
       ],
