@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
 import 'package:udemy_curso_app/providers/product_state.dart';
+import 'package:udemy_curso_app/utils/helpers/snackbar.dart';
 import 'package:uuid/uuid.dart';
 
 final uuid = Uuid();
@@ -18,7 +20,12 @@ class RegisterProductForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ProductState()),
+        ChangeNotifierProvider(
+          create: (context) => SnackBarHelp(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProductState(),
+        ),
       ],
       child: SafeArea(
         child: Container(
@@ -89,8 +96,8 @@ class TextFormStyle extends StatelessWidget {
           },
         ),
         const SizedBox(height: 30),
-        Consumer<ProductState>(
-          builder: (BuildContext context, _state, _) {
+        Consumer2<ProductState, SnackBarHelp>(
+          builder: (BuildContext context, stateProduct, stateSnack, _) {
             return ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
@@ -105,10 +112,12 @@ class TextFormStyle extends StatelessWidget {
                       id: uuid.v4(),
                       name: _nameController.text,
                       price: double.tryParse(_priceController.text) ?? 0);
-                  await _state.insertProduct(
+                  await stateProduct.insertProduct(
                     newProduct.id,
                     newProduct.toMapProducts(),
                   );
+                  await stateSnack.sucess('Produto cadastrado.');
+                  Navigator.popAndPushNamed(context, '/home');
                 } else {
                   Exception('Formulário preenchido incorretamente');
                 }
