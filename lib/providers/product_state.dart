@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
 
 class ProductState extends ChangeNotifier {
-  //INicializa a lista
+  //Inicializa a lista
   ProductState() {
     _initState();
   }
@@ -41,7 +41,6 @@ class ProductState extends ChangeNotifier {
         );
       notifyListeners();
     } catch (e) {
-      print("ERRO NO GET + $e");
       notifyListeners();
     } finally {
       isLoading = false;
