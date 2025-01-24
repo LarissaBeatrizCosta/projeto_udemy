@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
-import 'package:udemy_curso_app/providers/product_state.dart';
+import 'package:udemy_curso_app/controllers/product_state.dart';
 import 'package:udemy_curso_app/utils/helpers/snackbar.dart';
 import 'package:uuid/uuid.dart';
 

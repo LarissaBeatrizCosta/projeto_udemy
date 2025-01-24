@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../providers/user_state.dart';
+import '../controllers/user_state.dart';
 
 class UserBind extends Bindings{
   @override

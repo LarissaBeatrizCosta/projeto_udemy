@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:get/get.dart';
-import 'package:udemy_curso_app/providers/user_state.dart';
+import 'package:udemy_curso_app/controllers/user_state.dart';
 
 import '../utils/helpers/circular_progress.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:udemy_curso_app/providers/product_state.dart';
+import 'package:udemy_curso_app/controllers/product_state.dart';
 import '../models/products_model.dart';
 import '../utils/helpers/circular_progress.dart';
 import '../utils/helpers/snackbar.dart';

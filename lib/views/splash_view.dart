@@ -21,7 +21,7 @@ class SplashView extends StatelessWidget {
         height: 200,
         child: Lottie.asset("assets/animations/dog.json"),
       ),
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 2000),
       animationDuration: const Duration(milliseconds: 1000),
       onAnimationEnd: () => debugPrint("On Scale End"),
       nextScreen: const LoginView(),
