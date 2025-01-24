@@ -110,7 +110,7 @@ class ProductsView extends StatelessWidget {
                                     right: 20,
                                     bottom: 20,
                                   ),
-                                  height: 500,
+                                  height: 300,
                                   child: Form(
                                     key: formKey,
                                     child: Column(
@@ -148,7 +148,7 @@ class ProductsView extends StatelessWidget {
                                             }
                                           },
                                         ),
-                                        SizedBox(height: 20),
+                                        SizedBox(height: 30),
                                         TextFormField(
                                           controller: _priceController,
                                           keyboardType: TextInputType.number,
@@ -181,53 +181,85 @@ class ProductsView extends StatelessWidget {
                                           },
                                         ),
                                         const SizedBox(height: 30),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.orange,
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 15, horizontal: 20),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          onPressed: () async {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              ProductsModel newProduct =
-                                                  ProductsModel(
-                                                      id: product.id,
-                                                      name:
-                                                          _nameController.text,
-                                                      price: double.tryParse(
-                                                              _priceController
-                                                                  .text) ??
-                                                          0);
-                                              await stateProduct.updateProduct(
-                                                  newProduct.name,
-                                                  newProduct.price,
-                                                  product.id);
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.orange,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 15,
+                                                        horizontal: 20),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                              ),
+                                              onPressed: () async {
+                                                if (formKey.currentState!
+                                                    .validate()) {
+                                                  ProductsModel newProduct =
+                                                      ProductsModel(
+                                                          id: product.id,
+                                                          name: _nameController
+                                                              .text,
+                                                          price: double.tryParse(
+                                                                  _priceController
+                                                                      .text) ??
+                                                              0);
+                                                  await stateProduct
+                                                      .updateProduct(
+                                                          newProduct.name,
+                                                          newProduct.price,
+                                                          product.id);
 
-                                              await stateSnack
-                                                  .sucess('Produto editado');
-                                              _nameController.clear();
-                                              _priceController.clear();
+                                                  await stateSnack.sucess(
+                                                      'Produto editado');
 
-                                              Navigator.pushReplacementNamed(
-                                                  context, 'products'); //Gambiarra
-                                            } else {
-                                              await stateSnack.error(
-                                                  'Formulário preenchido incorretamente');
-                                            }
-                                          },
-                                          child: const Text(
-                                            'Confirmar',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              color: Colors.black,
+                                                  Navigator.pushReplacementNamed(
+                                                      context,
+                                                      'products'); //Gambiarra
+                                                } else {
+                                                  await stateSnack.error(
+                                                      'Formulário preenchido incorretamente');
+                                                }
+                                              },
+                                              child: const Text(
+                                                'Confirmar',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            SizedBox(width: 30),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.amber,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 15,
+                                                        horizontal: 20),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text(
+                                                'Cancelar',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
