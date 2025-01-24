@@ -75,7 +75,7 @@ class ProductState extends ChangeNotifier {
         .doc(productId)
         .update({
       'name': name,
-      'price':price
+      'price':price,
     });
     notifyListeners();
   }

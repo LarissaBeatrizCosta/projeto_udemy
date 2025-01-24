@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:udemy_curso_app/providers/product_state.dart';
+import '../models/products_model.dart';
 import '../utils/helpers/circular_progress.dart';
+import '../utils/helpers/snackbar.dart';
 import '../utils/home/drawer_home.dart';
 
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _priceController = TextEditingController();
+
 class ProductsView extends StatelessWidget {
-  const ProductsView({super.key});
+  ProductsView({super.key});
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +22,9 @@ class ProductsView extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ProductState(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SnackBarHelp(),
         ),
       ],
       child: Scaffold(
@@ -40,8 +51,8 @@ class ProductsView extends StatelessWidget {
           ],
         ),
         drawer: DrawerHome(),
-        body: Consumer<ProductState>(
-          builder: (BuildContext context, stateProduct, _) {
+        body: Consumer2<ProductState, SnackBarHelp>(
+          builder: (BuildContext context, stateProduct, stateSnack, _) {
             if (stateProduct.isLoading) {
               return CircularProgress();
             }
@@ -82,7 +93,148 @@ class ProductsView extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.edit, color: Colors.blue),
                           onPressed: () async {
+                            showModalBottomSheet(
+                              context: context,
+                              isDismissible: false,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                ),
+                              ),
+                              builder: ((context) {
+                                return Container(
+                                  margin: EdgeInsets.only(
+                                    top: 30,
+                                    left: 20,
+                                    right: 20,
+                                    bottom: 20,
+                                  ),
+                                  height: 500,
+                                  child: Form(
+                                    key: formKey,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Editar Produto',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        SizedBox(height: 30),
+                                        TextFormField(
+                                          controller: _nameController,
+                                          decoration: InputDecoration(
+                                            labelText: 'Nome do Produto',
+                                            labelStyle: const TextStyle(
+                                                color: Colors.orange),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.orange,
+                                                  width: 2),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return "Preencha o nome do produto";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                        SizedBox(height: 20),
+                                        TextFormField(
+                                          controller: _priceController,
+                                          keyboardType: TextInputType.number,
+                                          decoration: InputDecoration(
+                                            labelText: 'Valor (R\$)',
+                                            labelStyle: const TextStyle(
+                                                color: Colors.orange),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.orange,
+                                                  width: 2),
+                                            ),
+                                          ),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(
+                                                    r"^\d{1,4}(\.\d{0,2})?")),
+                                          ],
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return "Preencha o valor";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                        const SizedBox(height: 30),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.orange,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15, horizontal: 20),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          onPressed: () async {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              ProductsModel newProduct =
+                                                  ProductsModel(
+                                                      id: product.id,
+                                                      name:
+                                                          _nameController.text,
+                                                      price: double.tryParse(
+                                                              _priceController
+                                                                  .text) ??
+                                                          0);
+                                              await stateProduct.updateProduct(
+                                                  newProduct.name,
+                                                  newProduct.price,
+                                                  product.id);
 
+                                              await stateSnack
+                                                  .sucess('Produto editado');
+                                              _nameController.clear();
+                                              _priceController.clear();
+
+                                              Navigator.pushReplacementNamed(
+                                                  context, 'products'); //Gambiarra
+                                            } else {
+                                              await stateSnack.error(
+                                                  'Formulário preenchido incorretamente');
+                                            }
+                                          },
+                                          child: const Text(
+                                            'Confirmar',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                            );
                           },
                         ),
                         IconButton(
@@ -103,91 +255,3 @@ class ProductsView extends StatelessWidget {
     );
   }
 }
-
-// void _showEditDialog(BuildContext context, ProductsModel product,
-//     ProductState stateProductModal) {
-//   final TextEditingController nameController = TextEditingController();
-//   final TextEditingController priceController = TextEditingController();
-//   final formKey = GlobalKey<FormState>();
-//
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return AlertDialog(
-//         title: Text('Editar Produto'),
-//         content: SingleChildScrollView(
-//           child: Form(
-//             key: formKey,
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 TextFormField(
-//                   controller: nameController,
-//                   decoration: InputDecoration(
-//                     labelText: 'Nome do Produto',
-//                     labelStyle: const TextStyle(color: Colors.orange),
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(10),
-//                     ),
-//                     focusedBorder: OutlineInputBorder(
-//                       borderSide:
-//                           const BorderSide(color: Colors.orange, width: 2),
-//                     ),
-//                   ),
-//                   validator: (value) {
-//                     if (value == null || value.isEmpty) {
-//                       return "Preencha o nome do produto";
-//                     }
-//                     return null;
-//                   },
-//                 ),
-//                 SizedBox(height: 16), // Espaço entre os campos
-//                 TextFormField(
-//                   controller: priceController,
-//                   decoration: InputDecoration(
-//                     labelText: 'Preço do Produto',
-//                     labelStyle: const TextStyle(color: Colors.orange),
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(10),
-//                     ),
-//                     focusedBorder: OutlineInputBorder(
-//                       borderSide:
-//                           const BorderSide(color: Colors.orange, width: 2),
-//                     ),
-//                   ),
-//                   keyboardType: TextInputType.number,
-//                   validator: (value) {
-//                     if (value == null || value.isEmpty) {
-//                       return "Preencha o preço do produto";
-//                     }
-//                     return null;
-//                   },
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//         actions: [
-//           TextButton(
-//             onPressed: () {
-//               if (formKey.currentState!.validate()) {
-//                 stateProductModal.updateProduct(
-//                     product.name, product.price, product.id);
-//                 print(
-//                     'MODAL AQUI ${product.name}-${product.price}-${product.id}');
-//                 Navigator.pushReplacementNamed(context, '/home');
-//               }
-//             },
-//             child: Text('Salvar'),
-//           ),
-//           TextButton(
-//             onPressed: () {
-//               Navigator.of(context).pop();
-//             },
-//             child: Text('Cancelar'),
-//           ),
-//         ],
-//       );
-//     },
-//   );
-// }
