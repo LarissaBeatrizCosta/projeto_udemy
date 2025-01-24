@@ -11,22 +11,22 @@ class ItemsHome extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: [
-        for(int i = 0; i< 6; i++)
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.orange,
-            borderRadius: BorderRadius.circular(20),
-          ) ,
-          padding: EdgeInsets.only(
-            left: 15,
-            right: 15,
-            top: 10,
+        for (int i = 0; i < 6; i++)
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: EdgeInsets.only(
+              left: 15,
+              right: 15,
+              top: 10,
+            ),
+            margin: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
           ),
-          margin: EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 10,
-          ),
-        ),
       ],
     );
   }

@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:udemy_curso_app/models/products_model.dart';
 
 class ProductState extends ChangeNotifier {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
   //Inicializa a lista
   ProductState() {
     _initState();
@@ -26,8 +28,7 @@ class ProductState extends ChangeNotifier {
   Future<void> getProducts() async {
     try {
       isLoading = true;
-      QuerySnapshot snapshot =
-          await FirebaseFirestore.instance.collection('products').get();
+      QuerySnapshot snapshot = await db.collection('products').get();
 
       productsList
         ..clear()
@@ -50,17 +51,13 @@ class ProductState extends ChangeNotifier {
   //Método que add no banco de produtos
   Future<void> insertProduct(
       String productId, Map<String, dynamic> mapProduct) async {
-    FirebaseFirestore.instance
-        .collection('products')
-        .doc(productId)
-        .set(mapProduct);
+    await db.collection('products').doc(productId).set(mapProduct);
     notifyListeners();
   }
 
   //Método que deleta do firestore
   Future<void> deleteProduct(String productId) async {
-    await FirebaseFirestore.instance
-        .collection('products')
+    await db.collection('products')
         .doc(productId)
         .delete();
     productsList.removeWhere((product) => product.id == productId);
@@ -70,12 +67,11 @@ class ProductState extends ChangeNotifier {
   //Método que atualiza
   Future<void> updateProduct(
       String name, double price, String productId) async {
-    await FirebaseFirestore.instance
-        .collection('products')
+    await db.collection('products')
         .doc(productId)
         .update({
       'name': name,
-      'price':price,
+      'price': price,
     });
     notifyListeners();
   }
