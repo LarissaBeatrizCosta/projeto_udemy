@@ -8,28 +8,28 @@ class ImagePickerState extends ChangeNotifier {
     _init();
   }
 
-  // Instância do Image Picker
+  /// Instância do Image Picker
   final _imagePicker = ImagePicker();
 
-  // Arquivo do Path da Imagem de Perfil
+  /// Arquivo do Path da Imagem de Perfil
   File? _file;
 
   File? get file => _file;
 
-  // Caminho fixo para a imagem de perfil
+  /// Caminho fixo para a imagem de perfil
   Future<String> _getProfileImagePath() async {
     final directory = await getApplicationDocumentsDirectory();
     return '${directory.path}/profile_image.png';
   }
 
-  // Método que inicia a tela chamando o path da imagem
+  /// Método que inicia a tela chamando o path da imagem
   Future<void> _init() async {
     final filePath = await _getProfileImagePath();
 
-    // Cria uma instância de File para o caminho
+    /// Cria uma instância de File para o caminho
     final file = File(filePath);
 
-    // Verifica se o arquivo existe antes de atribuir
+    /// Verifica se o arquivo existe antes de atribuir
     if (await file.exists()) {
       _file = file;
     } else {
@@ -39,32 +39,28 @@ class ImagePickerState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Método para adicionar foto da galeria
+  /// Método para adicionar foto da galeria
   Future<void> getImageFromGallery() async {
     final imageSelected =
         await _imagePicker.pickImage(source: ImageSource.gallery);
 
-    if (imageSelected == null) {
-      return;
-    }
-
     await saveImage(imageSelected);
   }
 
-  // Método para adicionar foto da câmera
+  /// Método para adicionar foto da câmera
   Future<void> getImageFromCamera() async {
     final imageSelected =
         await _imagePicker.pickImage(source: ImageSource.camera);
 
-    if (imageSelected == null) {
-      return;
-    }
 
     await saveImage(imageSelected);
   }
 
-  // Salva a imagem no local fixo
-  Future<void> saveImage(XFile image) async {
+  /// Salva a imagem no local fixo
+  Future<void> saveImage(XFile? image) async {
+    if (image == null) {
+      return;
+    }
     final path = image.path;
     final bytes = await File(path).readAsBytes();
 
